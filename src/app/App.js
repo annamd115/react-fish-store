@@ -8,7 +8,7 @@ import Register from '../components/Register/Register';
 // import Order from '../components/Order/Order';
 // import New from '../components/New/New';
 import Navbar from '../components/Navbar/Navbar';
-// import Login from '../components/Login/Login';
+import Login from '../components/Login/Login';
 import Inventory from '../components/Inventory/Inventory';
 import Home from '../components/Home/Home';
 // import Fish from '../components/Fish/Fish';
@@ -49,6 +49,7 @@ const PublicRoute = ({ component : Component, authed, ...rest}) => {
   );
 };
 
+
 class App extends Component {
   state={
     authed: false,
@@ -73,6 +74,11 @@ class App extends Component {
                     path="/register" 
                     authed={this.state.authed}
                     component={Register}
+                  />
+                   <PublicRoute 
+                    path="/login" 
+                    authed={this.state.authed}
+                    component={Login}
                   />
                 </Switch>
               </div>
