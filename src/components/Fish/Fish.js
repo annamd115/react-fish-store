@@ -5,7 +5,7 @@ import './Fish.css';
 
 class Fish extends React.Component {
   addClickEvent = () => {
-    this.props.addToOrder(this.props.details.id);
+    this.props.addToOrder(this.props.detailsg.id);
   }
 
   render () {
