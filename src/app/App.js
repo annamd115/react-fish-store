@@ -15,15 +15,15 @@ import Home from '../components/Home/Home';
 import fbConnection from '../firebaseRequests/connection';
 fbConnection();
 
-const PrivateRoute = ({ component : Component, authed, ...rest}) => {
+const PrivateRoute = ({ component: Component, authed, ...rest}) => {
   return (
-    <Route 
+    <Route
       {...rest}
-      render={props => 
+      render={props =>
         authed === true ? (
           <Component {...props} />
         ) : (
-          <Redirect 
+          <Redirect
             to={{pathname: '/login', state: {from: props.location}}}
           />
         )
@@ -32,15 +32,15 @@ const PrivateRoute = ({ component : Component, authed, ...rest}) => {
   );
 };
 
-const PublicRoute = ({ component : Component, authed, ...rest}) => {
+const PublicRoute = ({ component: Component, authed, ...rest}) => {
   return (
-    <Route 
+    <Route
       {...rest}
-      render={props => 
+      render={props =>
         authed === false ? (
           <Component {...props} />
         ) : (
-          <Redirect 
+          <Redirect
             to={{pathname: '/orders', state: {from: props.location}}}
           />
         )
@@ -49,7 +49,6 @@ const PublicRoute = ({ component : Component, authed, ...rest}) => {
   );
 };
 
-
 class App extends Component {
   state={
     authed: false,
@@ -57,12 +56,12 @@ class App extends Component {
 
   componentDidMount () {
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
+      if (user) {
         this.setState({authed: true});
       } else {
         this.setState({authed: false});
       }
-    })
+    });
   }
 
   componentWillUnmount () {
@@ -70,15 +69,15 @@ class App extends Component {
   }
 
   runAway = () => {
-    this.setState({authed:false});
+    this.setState({authed: false});
   }
 
-  render() {
+  render () {
     return (
       <div className="App">
         <BrowserRouter>
           <div>
-            <Navbar 
+            <Navbar
               authed={this.state.authed}
               runAway={this.runAway}
             />
@@ -86,33 +85,33 @@ class App extends Component {
               <div className="row">
                 <Switch>
                   <Route path="/" exact component={Home}/>
-                  <PrivateRoute 
-                    path="/inventory" 
+                  <PrivateRoute
+                    path="/inventory"
                     authed={this.state.authed}
                     component={Inventory}
                   />
-                  <PublicRoute 
-                    path="/register" 
+                  <PublicRoute
+                    path="/register"
                     authed={this.state.authed}
                     component={Register}
                   />
-                   <PublicRoute 
-                    path="/login" 
+                  <PublicRoute
+                    path="/login"
                     authed={this.state.authed}
                     component={Login}
                   />
-                  <PrivateRoute 
-                    path="/orders" 
+                  <PrivateRoute
+                    path="/orders"
                     authed={this.state.authed}
                     component={OrderSpa}
                   />
-                  <PrivateRoute 
-                    path="/order/:id" 
+                  <PrivateRoute
+                    path="/order/:id"
                     authed={this.state.authed}
                     component={SingleOrder}
                   />
-                  <PrivateRoute 
-                    path="/new" 
+                  <PrivateRoute
+                    path="/new"
                     authed={this.state.authed}
                     component={New}
                   />

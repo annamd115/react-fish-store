@@ -10,6 +10,6 @@ const loginUser = (user) => {
 
 const logoutUser = (user) => {
   return firebase.auth().signOut();
-}
+};
 
 export default {registerUser, loginUser, logoutUser};
