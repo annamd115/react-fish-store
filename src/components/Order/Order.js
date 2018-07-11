@@ -4,13 +4,15 @@ import formatPrice from '../../helpers';
 
 import './Order.css';
 
-
 class Order extends React.Component {
   renderOrder = (key) => {
     const fish = this.props.fishes.find(x => x.id === key);
     const count = this.props.order[key];
+    const xClickFunction = () => {
+      this.props.removeFromOrder(key);
+    };
 
-    return(
+    return (
       <li
         key={key}
         className="text-left"
@@ -19,7 +21,7 @@ class Order extends React.Component {
         <div className="col-xs-5">{fish.name}</div>
         <div className="col-xs-3">{formatPrice(fish.price)}</div>
         <div className="col-xs-2">
-          <button className="btn btn-default">&times;</button>  
+          <button className="btn btn-default" onClick={xClickFunction}>&times;</button>  
         </div>
       </li>
     );
