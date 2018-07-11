@@ -24,7 +24,7 @@ class Inventory extends React.Component {
   render () {
     const fishComponents = this.state.fishes.map((fish) => {
       return (
-        <Fish 
+        <Fish
           key={fish.id}
           details={fish}
         />
